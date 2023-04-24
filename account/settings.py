@@ -41,6 +41,12 @@ class Dev(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        
+        'rest_framework',
+        
+        'auth',
+        'register',
+        'account_profile',
     ]
 
     MIDDLEWARE = [
