@@ -43,11 +43,12 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         
         'rest_framework',
-        
-        'auth',
-        'register',
-        'account_profile',
+        'mh_auth.apps.MhAuthConfig',
+        'register.apps.RegisterConfig',
+        'account_profile.apps.AccountProfileConfig',
     ]
+    
+    AUTH_USER_MODEL = 'mh_auth.User'
 
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',

@@ -1,2 +1,12 @@
 /.venv
+
 /account/__pycache__/*
+/mh_auth/__pycache__/*
+/account_profile/__pycache__/*
+/register/__pycache__/*
+
+/mh_auth/migrations/__pycache__/*
+/account_profile/migrations/__pycache__/*
+/register/migrations/__pycache__/*
+
+db.sqlite3
