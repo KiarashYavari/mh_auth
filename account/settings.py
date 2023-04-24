@@ -140,6 +140,17 @@ class Dev(Configuration):
 
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     
+    # REST framework setting
+    # use jwt instead of rest default token authentication 
+    REST_USE_JWT = True
+    
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+        )
+    }
+    
 
 class Prod(Dev):
     DEBUG = values.BooleanValue(True)
