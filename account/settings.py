@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from configurations import Configuration
+from configurations import values
 
 class Dev(Configuration):
 
@@ -28,7 +29,7 @@ class Dev(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
 
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = values.ListValue(["localhost",'127.0.0.1'])
 
 
     # Application definition
@@ -86,6 +87,13 @@ class Dev(Configuration):
 
     # Password validation
     # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.Argon2PasswordHasher",
+        "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+        "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+        "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+        "django.contrib.auth.hashers.ScryptPasswordHasher",
+    ]
 
     AUTH_PASSWORD_VALIDATORS = [
         {
@@ -108,7 +116,7 @@ class Dev(Configuration):
 
     LANGUAGE_CODE = 'en-us'
 
-    TIME_ZONE = 'UTC'
+    TIME_ZONE = values.Value('UTC')
 
     USE_I18N = True
 
@@ -127,4 +135,5 @@ class Dev(Configuration):
     
 
 class Prod(Dev):
-    DEBUG = False
+    DEBUG = values.BooleanValue(True)
+    SECRET_KEY = values.SecretValue()
