@@ -29,7 +29,7 @@ class Dev(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
 
-    ALLOWED_HOSTS = values.ListValue(["localhost",'127.0.0.1'])
+    ALLOWED_HOSTS = values.ListValue(["localhost",'127.0.0.1', 'localhost:5173', 'moz-extension://7214e369-9554-4e37-96dd-fcf3d2fbe6a5'])
 
 
     # Application definition
@@ -43,6 +43,7 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         
         'rest_framework',
+        'corsheaders',
         'mh_auth.apps.MhAuthConfig',
         'register.apps.RegisterConfig',
         'account_profile.apps.AccountProfileConfig',
@@ -51,6 +52,7 @@ class Dev(Configuration):
     AUTH_USER_MODEL = 'mh_auth.User'
 
     MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -150,6 +152,20 @@ class Dev(Configuration):
             'rest_framework.authentication.SessionAuthentication',
         )
     }
+    
+    # allow cors requests
+    CORS_ORIGIN_ALLOW_ALL = True
+    CORS_ALLOW_CREDENTIALS = True
+    # CORS_ORIGIN_WHITELIST = [
+    #     'http://127.0.0.1:5173',
+    #     'http://localhost:5173',
+    # ]
+    # CSRF_TRUSTED_ORIGINS = [
+    #     'http://127.0.0.1:5173',
+    #     'http://localhost:5173',
+    #     'moz-extension://7214e369-9554-4e37-96dd-fcf3d2fbe6a5',
+    # ]
+    
     
 
 class Prod(Dev):
